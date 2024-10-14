@@ -1,59 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visualização Titanic</title>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <title>Visualização de Mortes por Classe e Gênero no Titanic</title>
   <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      padding: 20px;
       background-color: #f4f4f4;
     }
+
     .container {
-      width: 90%;
-      margin: 50px auto;
-      text-align: center;
+      width: 80%;
+      margin: 0 auto;
     }
-    #graph {
-      width: 100%;
-      height: 600px;
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    canvas {
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Visualização de Dados do Titanic</h1>
-    <div id="graph"></div>
+    <h1>Mortes por Classe e Gênero no Titanic</h1>
+    <canvas id="titanicChart" width="400" height="200"></canvas>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // Dados do gráfico
-    var fareData = {
-      x: ['0-10', '10-30', '30-50', '50-100', '100-300', '300-600'],
-      y: [10, 20, 15, 30, 25, 5], // Quantidade de pessoas por faixa de valor de fare
+    const ctx = document.getElementById('titanicChart').getContext('2d');
+    
+    // Dados de exemplo
+    const data = {
+      labels: ['Primeira Classe', 'Segunda Classe', 'Terceira Classe'],
+      datasets: [
+        {
+          label: 'Homens',
+          data: [52, 104, 204], // Dados de exemplo para homens em cada classe
+          backgroundColor: 'rgba(54, 162, 235, 0.6)',
+        },
+        {
+          label: 'Mulheres',
+          data: [20, 76, 89], // Dados de exemplo para mulheres em cada classe
+          backgroundColor: 'rgba(255, 99, 132, 0.6)',
+        }
+      ]
+    };
+
+    // Configuração do gráfico
+    const config = {
       type: 'bar',
-      text: ['Classe 3: 5 mortos', 'Classe 2: 8 mortos', 'Classe 1: 2 mortos'],
-      marker: {
-        color: ['#FF4136', '#FF851B', '#FFDC00', '#2ECC40', '#0074D9', '#B10DC9']
+      data: data,
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: 'Número de Mortes'
+            }
+          }
+        }
       }
     };
 
-    var layout = {
-      title: 'Quantidade de Pessoas por Intervalo de Preço (Fare)',
-      xaxis: {
-        title: 'Intervalo de Fare'
-      },
-      yaxis: {
-        title: 'Quantidade de Pessoas'
-      },
-      hovermode: 'closest'
-    };
-
     // Renderizar o gráfico
-    Plotly.newPlot('graph', [fareData], layout);
+    new Chart(ctx, config);
   </script>
 </body>
 </html>
