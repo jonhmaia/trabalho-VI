@@ -37,12 +37,12 @@
     <script>
       const ctx = document.getElementById('titanicChart').getContext('2d');
 
-      // Dados reais das mortes por faixa de tarifa e gênero
-      const totalData = [65, 47, 43, 16, 5,6, 18]; // Total de mortes por faixa
+     
+      const totalData = [65, 47, 43, 16, 5,6, 18]; 
       const homens = [49, 19, 18, 3, 3, 4,6]; // Mortes de homens por faixa de tarifa
       const mulheres = [6, 3, 4, 3, 1, 1,1]; // Mortes de mulheres por faixa de tarifa
 
-      // Dados para exibir no gráfico
+      
       const data = {
         labels: ['0-10', '10-19', '20-29', '30-39', '40-49', '50-70','70+'],
         datasets: [
@@ -55,7 +55,7 @@
       };
     
 
-      // Tooltip personalizado para mostrar a divisão de gênero ao passar o mouse
+      
       const config = {
         type: 'bar',
         data: data,
