@@ -37,18 +37,18 @@
   <script>
     const ctx = document.getElementById('titanicChart').getContext('2d');
     
-    // Dados de exemplo
+    // Dados reais das mortes por faixa de tarifa e gênero
     const data = {
-      labels: ['0-10', '10-30', '30-50', '50+'],
+      labels: ['0-10', '10-20', '20-30', '30-40', '40-50'],
       datasets: [
         {
           label: 'Homens',
-          data: [100, 60, 30, 10], // Dados de exemplo para homens em cada faixa de tarifa
+          data: [49, 19, 18, 3, 3], // Dados reais para homens
           backgroundColor: 'rgba(54, 162, 235, 0.6)',
         },
         {
           label: 'Mulheres',
-          data: [50, 40, 20, 5], // Dados de exemplo para mulheres em cada faixa de tarifa
+          data: [6, 3, 4, 3, 1], // Dados reais para mulheres
           backgroundColor: 'rgba(255, 99, 132, 0.6)',
         }
       ]
