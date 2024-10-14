@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visualização de Mortes por Classe e Gênero no Titanic</title>
+  <title>Visualização de Mortes por Tarifa e Gênero no Titanic</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -29,7 +29,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Mortes por Classe e Gênero no Titanic</h1>
+    <h1>Mortes por Tarifa e Gênero no Titanic</h1>
     <canvas id="titanicChart" width="400" height="200"></canvas>
   </div>
 
@@ -39,16 +39,16 @@
     
     // Dados de exemplo
     const data = {
-      labels: ['Primeira Classe', 'Segunda Classe', 'Terceira Classe'],
+      labels: ['0-10', '10-30', '30-50', '50+'],
       datasets: [
         {
           label: 'Homens',
-          data: [52, 104, 204], // Dados de exemplo para homens em cada classe
+          data: [100, 60, 30, 10], // Dados de exemplo para homens em cada faixa de tarifa
           backgroundColor: 'rgba(54, 162, 235, 0.6)',
         },
         {
           label: 'Mulheres',
-          data: [20, 76, 89], // Dados de exemplo para mulheres em cada classe
+          data: [50, 40, 20, 5], // Dados de exemplo para mulheres em cada faixa de tarifa
           backgroundColor: 'rgba(255, 99, 132, 0.6)',
         }
       ]
