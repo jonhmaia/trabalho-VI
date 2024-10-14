@@ -29,7 +29,7 @@
   </head>
   <body>
     <div class="container">
-      <h1>Mortes por Faixa de Tarifa no Titanic</h1>
+      <h1>Vizualização por tarifa</h1>
       <canvas id="titanicChart" width="400" height="200"></canvas>
     </div>
 
@@ -47,7 +47,7 @@
         labels: ['0-10', '10-19', '20-29', '30-39', '40-49', '50-70','70+'],
         datasets: [
           {
-            label: 'Total de Mortes',
+            label: 'Quantidade de pessoas por tarifa',
             data: totalData,
             backgroundColor: 'rgba(178,34,34)',
           }
@@ -70,7 +70,8 @@
                    
                     `Total de pessoas por faixa: ${totalData[faixaIndex]}`,
                     `Mortes de Homens: ${homens[faixaIndex]}`,
-                    `Mortes de Mulheres: ${mulheres[faixaIndex]}`
+                    `Mortes de Mulheres: ${mulheres[faixaIndex]}`,
+                    'Sobreviventes: ' + (totalData[faixaIndex] - homens[faixaIndex] - mulheres[faixaIndex])
                     
                   ];
                 }
@@ -82,7 +83,7 @@
               beginAtZero: true,
               title: {
                 display: true,
-                text: 'Número de Mortes'
+                text: 'Quantidade de pessoas'
               }
 
             },
