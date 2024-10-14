@@ -1,79 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visualização de Mortes por Tarifa e Gênero no Titanic</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 20px;
-      background-color: #f4f4f4;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visualização de Mortes por Tarifa no Titanic</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f4f4f4;
+      }
 
-    .container {
-      width: 80%;
-      margin: 0 auto;
-    }
+      .container {
+        width: 80%;
+        margin: 0 auto;
+      }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
 
-    canvas {
-      margin-top: 40px;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Mortes por Tarifa e Gênero no Titanic</h1>
-    <canvas id="titanicChart" width="400" height="200"></canvas>
-  </div>
+      canvas {
+        margin-top: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Mortes por Faixa de Tarifa no Titanic</h1>
+      <canvas id="titanicChart" width="400" height="200"></canvas>
+    </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    const ctx = document.getElementById('titanicChart').getContext('2d');
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById('titanicChart').getContext('2d');
+
+      // Dados reais das mortes por faixa de tarifa e gênero
+      const totalData = [65, 47, 43, 16, 5,6, 18]; // Total de mortes por faixa
+      const homens = [49, 19, 18, 3, 3, 4,6]; // Mortes de homens por faixa de tarifa
+      const mulheres = [6, 3, 4, 3, 1, 1,1]; // Mortes de mulheres por faixa de tarifa
+
+      // Dados para exibir no gráfico
+      const data = {
+        labels: ['0-10', '10-19', '20-29', '30-39', '40-49', '50-70','70+'],
+        datasets: [
+          {
+            label: 'Total de Mortes',
+            data: totalData,
+            backgroundColor: 'rgba(178,34,34)',
+          }
+        ]
+      };
     
-    // Dados reais das mortes por faixa de tarifa e gênero
-    const data = {
-      labels: ['0-10', '10-20', '20-30', '30-40', '40-50'],
-      datasets: [
-        {
-          label: 'Homens',
-          data: [49, 19, 18, 3, 3], // Dados reais para homens
-          backgroundColor: 'rgba(54, 162, 235, 0.6)',
-        },
-        {
-          label: 'Mulheres',
-          data: [6, 3, 4, 3, 1], // Dados reais para mulheres
-          backgroundColor: 'rgba(255, 99, 132, 0.6)',
-        }
-      ]
-    };
 
-    // Configuração do gráfico
-    const config = {
-      type: 'bar',
-      data: data,
-      options: {
-        responsive: true,
-        scales: {
-          y: {
-            beginAtZero: true,
-            title: {
-              display: true,
-              text: 'Número de Mortes'
+      // Tooltip personalizado para mostrar a divisão de gênero ao passar o mouse
+      const config = {
+        type: 'bar',
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            tooltip: {
+              callbacks: {
+                label: function(tooltipItem) {
+                  const faixaIndex = tooltipItem.dataIndex;
+                  return [
+                   
+                    `Total de pessoas por faixa: ${totalData[faixaIndex]}`,
+                    `Mortes de Homens: ${homens[faixaIndex]}`,
+                    `Mortes de Mulheres: ${mulheres[faixaIndex]}`
+                    
+                  ];
+                }
+              }
             }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Número de Mortes'
+              }
+
+            },
+              x: {
+                  title: {
+                  display: true,
+                  text: 'Faixa de Tarifa'
+                  }
+              }
+
           }
         }
-      }
-    };
+      };
 
-    // Renderizar o gráfico
-    new Chart(ctx, config);
-  </script>
-</body>
+      // Renderizar o gráfico
+      new Chart(ctx, config);
+    </script>
+  </body>
 </html>
